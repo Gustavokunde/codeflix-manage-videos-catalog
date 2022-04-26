@@ -1,6 +1,6 @@
 import { omit } from "lodash";
 import { Category } from "./category";
-import UniqueEntityId from "../../../shared/domain/unique-entity-id.vo";
+import UniqueEntityId from "../../../shared/domain/value-objects/unique-entity-id.vo";
 
 describe("Category Tests", () => {
   //Tripe AAA - Arrange, Act, Assert
@@ -84,5 +84,28 @@ describe("Category Tests", () => {
       name: "Movie",
       created_at,
     });
+  });
+
+  it("should update category", () => {
+    const category = new Category({ name: "Movie" });
+
+    category.update("Documentary", "some description");
+
+    expect(category.name).toBe("Documentary");
+    expect(category.description).toBe("some description");
+  });
+
+  it("should active a category", () => {
+    const category = new Category({ name: "Filmes", is_active: false });
+
+    category.activate();
+    expect(category.is_active).toBeTruthy();
+  });
+
+  it("should deactive a category", () => {
+    const category = new Category({ name: "Filmes", is_active: true });
+
+    category.deactivate();
+    expect(category.is_active).toBeFalsy();
   });
 });
