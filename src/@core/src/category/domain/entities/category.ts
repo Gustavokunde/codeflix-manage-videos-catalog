@@ -70,7 +70,7 @@ export class Category extends Entity<CategoryProperties> {
     this.props.is_active = value ?? true;
   }
 
-  get created_ate() {
+  get created_at() {
     return this.props.created_at;
   }
 }
